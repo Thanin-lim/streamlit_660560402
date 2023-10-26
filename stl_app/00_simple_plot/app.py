@@ -22,4 +22,3 @@ progress_bar.empty()
 # it just causes a plain rerun.
 
 st.button("Re-run")
-#first

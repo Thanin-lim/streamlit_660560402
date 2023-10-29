@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # --- 01
 # https://docs.streamlit.io/library/api-reference/write-magic
 st.markdown('สวัสดี! ***Streamlit***')
-st.write('จากโค้ด', '`st.markdown("สวัสดี!")`')
+st.write('จากโค้ด', '`st.markdown("สวัสดีsss!")`')
 # st.write(pd.DataFrame({
 #     'first column': [1, 2, 3, 4],
 #     'second column': [10, 20, 30, 40],
@@ -59,4 +59,4 @@ ax1 = plt.title(graph_title)
 # 2. how to setup limit of x-axis value to 0.0 - 1.0?
 # 3. how to setup more bins, like 20 or 40?
 st.pyplot(fig1)
-#s
+#s3344444

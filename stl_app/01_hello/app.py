@@ -140,7 +140,7 @@ with col2:
 with col3:
     st.area_chart(df_dbh_grouped)
 
-tree_df=pd.read_csv('/stl_app/01_hello/trees.csv')
+tree_df=pd.read_csv('/streamlit_660560402/stl_app/01_hello/trees.csv')
 
 
 df_dbh_grouped = pd.DataFrame(tree_df.groupby(['dbh']).count()['tree_id'])

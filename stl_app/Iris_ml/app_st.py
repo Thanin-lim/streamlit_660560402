@@ -43,12 +43,36 @@ else:
     rfc.fit(x_train, y_train)
 
     y_pred = rfc.predict(x_test)
-
     score = round(accuracy_score(y_pred, y_test), 2)
+    st.title("Iris ")
+    st.markdown('สร้าง `scatter plot` แสดงผลข้อมูล **Palmer\'s Penguins** กัน แบบเดียวกับ **Iris dataset**')
 
-    st.write('We trained a Random Forest model on these data,'
-             ' it has a score of {}! Use the '
-             'inputs below to try out the model.'.format(score))
+    choices = ['sepal.length',
+               'sepal.width',
+               'petal.length',
+               'petal.width']
+
+    selected_x_var = st.selectbox('เลือก แกน x', (choices))
+    selected_y_var = st.selectbox('เลือก แกน y', (choices))
+
+    st.subheader('ข้อมูลตัวอย่าง')
+    st.write(iris_df)
+
+    st.subheader('แสดงผลข้อมูล')
+    sns.set_style('darkgrid')
+    markers = {"Setosa": "v", "Versicolor": "s", "Virginica": 'o'}
+
+    fig, ax = plt.subplots()
+    ax = sns.scatterplot(data=iris_df,
+                         x=selected_x_var, y=selected_y_var,
+                         hue='variety', markers=markers, style='variety')
+    plt.xlabel(selected_x_var)
+    plt.ylabel(selected_y_var)
+    plt.title("Palmer's Penguins Data")
+    st.pyplot(fig)
+
+    textscore='<p style="font-family:Courier; color:Black; font-size: 16px;">We trained a Random Forest model on these data ,it has a score of {}! Use the inputs below to try out the model.</p>'
+    st.write(textscore.format(score),unsafe_allow_html=True)
 
 with st.form('user_inputs'):
     sepal_length = st.number_input(
@@ -61,38 +85,16 @@ with st.form('user_inputs'):
         'Petal Width', min_value=0.0, max_value=12.0, value=10.0)
     st.form_submit_button()
 
-
-new_prediction = rfc.predict([[sepal_length, sepal_width, petal_length,
-                               petal_width]])
+new_prediction =rfc.predict([[sepal_length, sepal_width, petal_length,
+                                   petal_width]])
 prediction_species = unique_penguin_mapping[new_prediction][0]
-st.write('We predict your Iris is of the {} species'.format(prediction_species))
+textpredict = '<p style="font-family:Courier; color:Black; font-size: 20px;">We predict your Iris is of the {} species</p>'
+st.markdown(textpredict.format(prediction_species), unsafe_allow_html=True)
 
 
 
-st.title("Iris ")
-st.markdown('สร้าง `scatter plot` แสดงผลข้อมูล **Palmer\'s Penguins** กัน แบบเดียวกับ **Iris dataset**')
-
-choices = ['sepal.length',
-           'sepal.width',
-           'petal.length',
-           'petal.width']
-
-selected_x_var = st.selectbox('เลือก แกน x', (choices))
-selected_y_var = st.selectbox('เลือก แกน y', (choices))
 
 
-st.subheader('ข้อมูลตัวอย่าง')
-st.write(iris_df)
 
-st.subheader('แสดงผลข้อมูล')
-sns.set_style('darkgrid')
-markers = {"Setosa": "v", "Versicolor": "s", "Virginica": 'o'}
 
-fig, ax = plt.subplots()
-ax = sns.scatterplot(data=iris_df,
-                     x=selected_x_var, y=selected_y_var,
-                     hue='variety', markers=markers, style='variety')
-plt.xlabel(selected_x_var)
-plt.ylabel(selected_y_var)
-plt.title("Palmer's Penguins Data")
-st.pyplot(fig)
+
